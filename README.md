@@ -1,5 +1,5 @@
 # Basic Starter Kit
 
-## Owner your name
+## Evan Streeter
 
 alter this statement to indicate the usage of this repository
