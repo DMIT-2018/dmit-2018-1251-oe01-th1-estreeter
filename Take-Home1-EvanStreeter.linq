@@ -26,3 +26,19 @@ ClubActivities.Where(x => x.StartDate.Value >= new DateTime(2025, 1, 1) && x.Cam
 	.Dump();
 	
 // Question 2
+
+// Question 3
+
+
+// Question 4
+
+// Question 5
+Clubs.OrderByDescending(x => x.ClubMembers.Count())
+.Select(x => new
+{
+	Supervisor = x.EmployeeID == null ? "Unkown" : x.Employee.FirstName + " " + x.Employee.LastName,
+	Club = x.ClubName,
+	MemberCount = x.ClubMembers.Count(),
+	Activities = x.ClubActivities.Count() == 0 ? "None Schedule" : x.ClubActivities.Count().ToString()
+})
+.Dump();
