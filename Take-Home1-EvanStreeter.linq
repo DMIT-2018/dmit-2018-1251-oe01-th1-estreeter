@@ -14,13 +14,15 @@
 </Query>
 
 // Question 1
-ClubActivities.Where(x => x.StartDate.Value >= new DateTime(2025, 1, 1) && (x.Location != "Scheduled Room" || x.Name != "BTech Club Meeting"))
+ClubActivities.Where(x => x.StartDate.Value >= new DateTime(2025, 1, 1) && x.CampusVenue.Location != "Scheduled Room" && x.Name != "BTech Club Meeting")
 	.OrderBy(x => x.StartDate)
 	.Select(x => new
 	{
 		StartDate = x.StartDate,
-		Location = x.Location,
-		Club = x.Description,
+		Location = x.CampusVenue.Location,
+		Club = x.Club.ClubName,
 		Activity = x.Name
 	})
 	.Dump();
+	
+// Question 2
