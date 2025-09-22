@@ -28,6 +28,15 @@ ClubActivities.Where(x => x.StartDate.Value >= new DateTime(2025, 1, 1) && x.Cam
 // Question 2
 
 // Question 3
+Students.Where(x => x.StudentPayments.Count() == 0 && x.Countries.CountryName != "Canada")
+	.OrderBy(x => x.LastName)
+	.Select( x => new {
+		StudentNumber = x.StudentNumber,
+		CountryName = x.Countries.CountryName,
+		FullName = x.FirstName + " " + x.LastName,
+		ClubMembershipCount = x.ClubMembers.Count() == 0 ? "None" : x.ClubMembers.Count().ToString()
+	})
+	.Dump();
 
 // Question 4
 Employees.Where(x => x.Position.Description == "Instructor" && x.ReleaseDate == null && x.ClassOfferings.Count() > 0)
