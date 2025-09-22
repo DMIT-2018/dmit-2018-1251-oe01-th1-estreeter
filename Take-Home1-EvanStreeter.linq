@@ -29,8 +29,20 @@ ClubActivities.Where(x => x.StartDate.Value >= new DateTime(2025, 1, 1) && x.Cam
 
 // Question 3
 
-
 // Question 4
+Employees.Where(x => x.Position.Description == "Instructor" && x.ReleaseDate == null && x.ClassOfferings.Count() > 0)
+	.OrderByDescending(x => x.ClassOfferings.Count())
+	.ThenBy(x => x.LastName)
+	.Select( x => new
+	{
+		ProgramName = x.Program.ProgramName,
+		FullName = x.FirstName + " " + x.LastName,
+		// I used values of 9 and 25 here due to the wording of the requirements
+		// More than 24 and more than 8
+		Workload = x.ClassOfferings.Count() < 9 ? "Low" : x.ClassOfferings.Count() < 25 ? "Med" : "High"
+	})	
+	.Dump();
+
 
 // Question 5
 Clubs.OrderByDescending(x => x.ClubMembers.Count())
