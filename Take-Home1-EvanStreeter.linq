@@ -26,6 +26,19 @@ ClubActivities.Where(x => x.StartDate.Value >= new DateTime(2025, 1, 1) && x.Cam
 	.Dump();
 	
 // Question 2
+Programs.Where( x => x.ProgramCourses.Count(p => p.Required) >= 22)
+	.OrderBy( x => x.ProgramName)
+	.Select( x => new
+	{
+		// Formatted this way due to space constraints. Personally prefer to use one line if possible
+		School = x.SchoolCode == "SAMIT" ? "School of Applied Media and IT" 	
+			: x.SchoolCode == "SEET" ? "School of Electrical Engineering Technology" 
+			: "Unknown",
+		Program = x.ProgramName,
+		RequiredCourseCount = x.ProgramCourses.Count(p => p.Required),
+		OptionalCourseCount = x.ProgramCourses.Count() - x.ProgramCourses.Count(p => p.Required)
+	})
+	.Dump();
 
 // Question 3
 Students.Where(x => x.StudentPayments.Count() == 0 && x.Countries.CountryName != "Canada")
